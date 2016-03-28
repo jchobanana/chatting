@@ -1,0 +1,11 @@
+<h1>2555 Le Conte Ave.</h1>
+
+<table class = "table">
+<% @topics.each do |p| %>
+  <tr>
+  <td><%= link_to p.subject, topic_path(p) %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= paginate @topics %>
