@@ -3,10 +3,10 @@
 <table class = "table">
 <% @topics.each do |p| %>
   <tr>
-  <td><%= link_to p.subject, topic_path(p) %></td>
+  <td><%= link_to p.subject, topic_path(p), :class => "btn btn-default" %></td>
   <td><%= p.user.try(:display_name) %></td>
   </tr>
 <% end %>
 </table>
-
+<%= link_to "心情分享", new_topic_path %>
 <%= paginate @topics %>
