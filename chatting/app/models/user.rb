@@ -5,4 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   has_many :topics
   has_many :comments
+
+  def display_name
+    email.split('@').first
+  end
 end
