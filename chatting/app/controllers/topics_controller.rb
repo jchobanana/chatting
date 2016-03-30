@@ -2,8 +2,19 @@ class TopicsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @topics = Topic.order('id DESC').page(params[:page]).per(10)
-  end
+      @q = Topic.ransack(params[:q])
+      @topics = @q.result(distinct: true)
+
+      if params[:sort] == "id"
+        @topics = @topics.order("id")
+      elsif params[:sort] == "updated"
+        @topics = @topics.order("updated_at DESC")
+      else
+        @topics = @topics.order("id DESC")
+      end
+
+      @topics = @topics.page( params[:page] )
+    end
 
   def show
     @topic = Topic.find(params[:id])

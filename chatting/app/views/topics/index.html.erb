@@ -1,4 +1,17 @@
 <h1>2555 Le Conte Ave.</h1>
+<p><%= link_to "心情分享", new_topic_path, :class => "btn btn-info" %></p>
+
+
+<%= search_form_for @q do |f| %>
+  <%= f.label :subject_cont, "關鍵字搜尋", :class=>'inline betaLabelTextField' %>
+  <%= f.search_field :subject_cont %>
+  <%= f.submit "Search", :class => "btn btn-success btn-sm" %>
+<% end %>
+
+<p>
+  <%= sort_link(@q, :id, "ID什麼排序法") %> |
+  <%= sort_link(@q, :updated_at, "最後更新時間") %>
+</p>
 
 <table class = "table">
 <% @topics.each do |p| %>
@@ -8,5 +21,4 @@
   </tr>
 <% end %>
 </table>
-<%= link_to "心情分享", new_topic_path %>
 <%= paginate @topics %>

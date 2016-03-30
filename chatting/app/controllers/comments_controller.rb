@@ -8,9 +8,27 @@ class CommentsController < ApplicationController
     @comment.user = current_user
 
     if @comment.save
-      redirect_to topic_url(@topic)
+      respond_to do |format|
+        format.html {redirect_to topic_url(@topic) }
+        format.js
+      end
+
     else
-      render "topics/show"
+      respond_to do |format|
+        format.html { render "topics/show" }
+        format.js
+      end
+    end
+  end
+
+  def destroy
+    @comment = current_user.comments.find( params[:id] )
+    @comment.destroy
+
+    # redirect_to :back ajax
+    respond_to do |format|
+      format.html { redirect_to :back}
+      format.js  #destroy.js.erb
     end
   end
 
