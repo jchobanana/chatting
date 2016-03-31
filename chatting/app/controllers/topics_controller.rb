@@ -1,5 +1,6 @@
 class TopicsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, :except => [:index, :show]
+  before_action :set_my_topic, :only => [:edit, :update, :destroy]
 
   def index
       @q = Topic.ransack(params[:q])
@@ -39,9 +40,41 @@ class TopicsController < ApplicationController
   end
 
   def destroy
+    @topic.destroy
+    redirect_to topics_url
   end
 
   def update
+    if params[:destory_image]
+      @topic.image = nil
+    end
+
+    if @topic.update( topic_params )
+      redirect_to topic_url(@topic)
+    else
+      render "edit"
+    end
+  end
+
+  def subscribe
+    @topic = Topic.find( params[:id] )
+
+    subscription = @topic.finy_subscription_by(current_user)
+    if subscription
+    else
+      @subscription = @topic.subscriptions.create!( :user => current_user)
+    end
+
+    redirect_to :back
+  end
+
+  def unsubscribe
+    @topic = Topic.find( params[:id] )
+
+    subscription = @topic.finy_subscription_by(current_user)
+    subscription.destroy
+
+    redirect_to :back
   end
 
 
@@ -49,7 +82,7 @@ class TopicsController < ApplicationController
   protected
 
   def topic_params
-    params.require(:topic).permit(:content, :subject)
+    params.require(:topic).permit(:content, :subject, :image)
   end
   def set_my_topic
     @topic = current_user.topics.find( params[:id])
