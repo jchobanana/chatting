@@ -82,7 +82,7 @@ class TopicsController < ApplicationController
   protected
 
   def topic_params
-    params.require(:topic).permit(:content, :subject, :image)
+    params.require(:topic).permit(:content, :subject, :image, :category_id)
   end
   def set_my_topic
     @topic = current_user.topics.find( params[:id])
