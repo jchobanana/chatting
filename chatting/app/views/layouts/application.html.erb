@@ -10,14 +10,21 @@
 <div class ="container">
 <h1><%= link_to "孩子，該回首頁嘍 ( ´ ▽ ` )ﾉ", root_path, :class => "btn btn-primary btn-lg active" %></h1>
 
-<%= image_tag("speechless.png") %>
+<%= t(:hi, :name => current_user.display_name ) %>
+
+<%= t("hello_world") %>
+
+<%= t("admin.foo") %>
+<%= t("admin", :scope => "foo") %>
+
+  <%= image_tag("speechless.png") %>
 <p><div class="logo"></div></p>
 
 
 <% if current_user %>
          <p class = "text-right"><%= link_to "心情分享", new_topic_path, :class => "btn btn-info btn-sm" %> |
-         <%= link_to('修改密碼', edit_registration_path(:user), :class => "btn btn-warning btn-sm") %> |
-         <%= link_to('登出', destroy_user_session_path, :class => "btn btn-warning btn-sm", :method => :delete) %></p>
+         <%= link_to( t(:change_password) , edit_registration_path(:user), :class => "btn btn-warning btn-sm") %> |
+         <%= link_to( t(:logout), destroy_user_session_path, :class => "btn btn-warning btn-sm", :method => :delete) %></p>
 
 
      <% else %>
@@ -31,6 +38,9 @@
     </div>
   </div>
 </div>
+
+  <%= link_to "中文版", :controller => controller_name, :action => action_name, :locale => "zh-TW" %>
+  <%= link_to "English", :controller => controller_name, :action => action_name, :locale => "en" %>
 
 </body>
 </html>
