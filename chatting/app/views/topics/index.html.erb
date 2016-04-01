@@ -13,13 +13,13 @@
   <%= sort_link(@q, :updated_at, "最後更新時間") %>
 </p>
 
-<table class = "table table-striped">
-<% @topics.each do |p| %>
-  <tr>
-  <td><%= link_to p.subject, topic_path(p), :class => "btn btn-default" %></td>
-  <td><%= p.user.try(:display_name) %></td>
-  <td>（分享於：<%= time_ago_in_words(p.created_at)%> 以前）</td>
-  </tr>
-<% end %>
+  <table class = "table table-striped">
+  <% @topics.each do |p| %>
+    <tr>
+    <td><%= link_to p.subject, topic_path(p), :class => "btn btn-default" %></td>
+    <td><%= p.user.try(:display_name) %></td>
+    <td>（分享於：<%= time_ago_in_words(p.created_at)%> 以前）</td>
+    </tr>
+  <% end %>
 </table>
 <%= paginate @topics %>

@@ -40,7 +40,9 @@
     <%= f.submit :class => "btn btn-warning" %>
   </div>
 <% end %>
-
+<div id="count">
+<%= render :partial => "comments/count", :locals => { :topic => @topic } %>
+</div>
 <h2>留言回覆</h2>
 <ul id="comments-list">
 

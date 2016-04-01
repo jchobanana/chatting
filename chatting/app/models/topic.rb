@@ -20,7 +20,7 @@ class Topic < ActiveRecord::Base
   end
 
   def finy_subscription_by(user)
-    self.subscriptions.find_by_user_id( user.id )
+    user && self.subscriptions.find_by_user_id( user.id )
   end
 
 end
