@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160401121157) do
+ActiveRecord::Schema.define(version: 20160402101110) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -39,6 +39,13 @@ ActiveRecord::Schema.define(version: 20160401121157) do
   add_index "likes", ["topic_id"], name: "index_likes_on_topic_id"
   add_index "likes", ["user_id"], name: "index_likes_on_user_id"
 
+  create_table "parks", force: :cascade do |t|
+    t.integer  "raw_id"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "subscriptions", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "topic_id"
@@ -53,14 +60,15 @@ ActiveRecord::Schema.define(version: 20160401121157) do
     t.string   "subject"
     t.text     "content"
     t.integer  "user_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.integer  "category_id"
     t.date     "publish_on"
+    t.string   "status",             default: "draft"
   end
 
   create_table "users", force: :cascade do |t|
@@ -78,6 +86,7 @@ ActiveRecord::Schema.define(version: 20160401121157) do
     t.datetime "updated_at",                          null: false
     t.string   "fb_uid"
     t.string   "fb_token"
+    t.string   "time_zone"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

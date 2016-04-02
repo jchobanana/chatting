@@ -1,6 +1,9 @@
 class Topic < ActiveRecord::Base
 
+  STATUS = ["draft", "published", "scheduled" ]
+
   validates_presence_of :subject
+
 
 
   belongs_to :user

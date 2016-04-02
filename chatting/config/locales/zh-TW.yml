@@ -7,3 +7,9 @@
   admin:
     foo: 人生
     bar: 好辛苦ㄋㄟ
+
+  topic:
+    status:
+      draft: 草稿
+      published: 公開發佈
+      scheduled: 預定
