@@ -1,3 +1,6 @@
+$("#count").html("<%=j render( :partial => "count", :locals => { :topic => @topic } ) %>");
+
+
 $("#comment-<%= @comment.id %>").remove();
 // alert("刪除成功！");
 

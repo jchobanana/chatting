@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+]<!DOCTYPE html>
 <html>
 <head>
   <title>Chatting</title>
@@ -8,32 +8,32 @@
 </head>
 <body>
 <div class ="container">
-<h1><%= link_to "孩子，該回首頁嘍 ( ´ ▽ ` )ﾉ", root_path, :class => "btn btn-primary btn-lg active" %></h1>
+<p class = "text-right"><h1><%= link_to "孩子，該回首頁嘍 ( ´ ▽ ` )ﾉ", root_path, :class => "btn btn-primary btn-lg active" %></h1></p>
 
-<%= t(:hi, :name => current_user.display_name ) %>
+
 
 <%= t("hello_world") %>
 
 <%= t("admin.foo") %>
 <%= t("admin", :scope => "foo") %>
 
-  <%= image_tag("speechless.png") %>
-<p><div class="logo"></div></p>
-
-
 <% if current_user %>
          <p class = "text-right"><%= link_to "心情分享", new_topic_path, :class => "btn btn-info btn-sm" %> |
          <%= link_to( t(:change_password) , edit_registration_path(:user), :class => "btn btn-warning btn-sm") %> |
-         <%= link_to( t(:logout), destroy_user_session_path, :class => "btn btn-warning btn-sm", :method => :delete) %></p>
-
-
+         <%= link_to( t(:logout), destroy_user_session_path, :class => "btn btn-warning btn-sm", :method => :delete) %> |
      <% else %>
-         <%= link_to('註冊', new_registration_path(:user), :class => "btn btn-warning btn-sm") %> |
-         <%= link_to('登入', new_session_path(:user), :class => "btn btn-warning btn-sm") %>
+         <%= link_to('註冊', new_registration_path(:user), :class => "btn btn-success btn-sm") %> |
+         <%= link_to('一般使用者登入', new_session_path(:user), :class => "btn btn-warning btn-sm") %> |
+         <%= link_to "登入 Facebook", user_omniauth_authorize_path(:facebook), :class => "btn btn-primary btn-sm" %>
+
      <% end %>
+
 
      <p style="color: green"><%= flash[:notice] %></p>
      <p style="color: red"><%= flash[:alert] %></p>
+
+       <%= image_tag("speechless.png") %>
+     <p><div class="logo"></div></p>
 <%= yield %>
     </div>
   </div>

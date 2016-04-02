@@ -5,7 +5,7 @@
   <%= render :partial => "like", :locals => { :like => like} %>
 </div>
 
-
+<p></p>
 <% subscription = @topic.finy_subscription_by(current_user) %>
 <% if subscription %>
   <%= link_to "Unsubscribe", unsubscribe_topic_path(@topic), :method => :post, :class => "btn btn-primary btn-sm" %>
