@@ -10,12 +10,12 @@
 <div class ="container">
 <p class = "text-right"><h1><%= link_to "孩子，該回首頁嘍 ( ´ ▽ ` )ﾉ", root_path, :class => "btn btn-primary btn-lg active" %></h1></p>
 
-
-
+<%= t(:hi, :name => current_user.display_name ) %>
 <%= t("hello_world") %>
-
-<%= t("admin.foo") %>
+<p></p>
 <%= t("admin", :scope => "foo") %>
+<%= t("admin.foo") %>
+<%= t("admin.bar") %>
 
 <% if current_user %>
          <p class = "text-right"><%= link_to "心情分享", new_topic_path, :class => "btn btn-info btn-sm" %> |
@@ -31,9 +31,9 @@
 
      <p style="color: green"><%= flash[:notice] %></p>
      <p style="color: red"><%= flash[:alert] %></p>
-
+      <div class="post ">
        <%= image_tag("speechless.png") %>
-     <p><div class="logo"></div></p>
+       </div>
 <%= yield %>
     </div>
   </div>

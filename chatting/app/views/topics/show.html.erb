@@ -13,6 +13,7 @@
   <%= link_to "Subscribe", subscribe_topic_path(@topic), :method => :post, :class => "btn btn-primary btn-sm" %>
   <% end %>
 
+
 <% if @topic.image.exists? %>
   <%= link_to @topic.image.url, :target => "_blank" do %>
     <%= image_tag(@topic.image.url(:thumb)) %>
