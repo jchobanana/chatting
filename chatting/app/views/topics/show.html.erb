@@ -6,12 +6,10 @@
 </div>
 
 <p></p>
-<% subscription = @topic.finy_subscription_by(current_user) %>
-<% if subscription %>
-  <%= link_to "Unsubscribe", unsubscribe_topic_path(@topic), :method => :post, :class => "btn btn-primary btn-sm" %>
-  <% else %>
-  <%= link_to "Subscribe", subscribe_topic_path(@topic), :method => :post, :class => "btn btn-primary btn-sm" %>
-  <% end %>
+
+<span id= "subscript-block" %>
+<%= render "subscribe" %>
+</span>
 
 
 <% if @topic.image.exists? %>
@@ -34,8 +32,8 @@
      <% end %>
   <% end %>
 
-  <%= link_to "修改", edit_topic_path(@topic),:class => "btn btn-info" %>
-  <%= link_to "刪除", topic_path(@topic),:class => "btn btn-danger", :method => :delete, data: {confirm: "你確定要刪除此心情分享嗎？"} %>
+  <%= link_to "edit", edit_topic_path(@topic),:class => "btn btn-info" %>
+  <%= link_to "delete", topic_path(@topic),:class => "btn btn-danger", :method => :delete, data: {confirm: "你確定要刪除此心情分享嗎？"} %>
 
   <div class="form-group">
     <%= f.label :content %>
@@ -57,7 +55,6 @@
 
 <% end %>
 </ul>
-
 
 
 

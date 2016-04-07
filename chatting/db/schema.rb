@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160402101110) do
+ActiveRecord::Schema.define(version: 20160406084357) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -42,6 +42,9 @@ ActiveRecord::Schema.define(version: 20160402101110) do
   create_table "parks", force: :cascade do |t|
     t.integer  "raw_id"
     t.string   "name"
+    t.string   "place"
+    t.string   "style"
+    t.string   "story"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -60,15 +63,17 @@ ActiveRecord::Schema.define(version: 20160402101110) do
     t.string   "subject"
     t.text     "content"
     t.integer  "user_id"
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.integer  "category_id"
     t.date     "publish_on"
-    t.string   "status",             default: "draft"
+    t.string   "status",             default: "published"
+    t.integer  "views_count",        default: 0
+    t.integer  "comments_count",     default: 0
   end
 
   create_table "users", force: :cascade do |t|

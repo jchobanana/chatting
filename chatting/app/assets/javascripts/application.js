@@ -14,9 +14,9 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap-sprockets
-//=require select2
+//= require select2
 //= require jquery.autosize
 
-$(document).ready(function(){
+$(document).on("page:change", function(){
   $('textarea').autosize();
 });

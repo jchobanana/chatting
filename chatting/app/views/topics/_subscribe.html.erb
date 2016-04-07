@@ -1,0 +1,6 @@
+<% subscription = @topic.finy_subscription_by(current_user) %>
+<% if subscription %>
+  <%= link_to "Unsubscribe", unsubscribe_topic_path(@topic), :method => :post, :remote => true, :class => "btn btn-primary btn-sm" %>
+  <% else %>
+  <%= link_to "Subscribe", subscribe_topic_path(@topic), :method => :post, :remote => true, :class => "btn btn-primary btn-sm" %>
+  <% end %>

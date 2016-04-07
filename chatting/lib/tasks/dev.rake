@@ -14,8 +14,11 @@ namespace :dev do
       if existing
         #update
       else
-        Park.create( :raw_id => p["_id"], :name => p["ParkName"])
-        puts "create #{p["ParkName"]}"
+        Park.create( :raw_id => p["_id"],
+                     :name => p["ParkName"],
+                     :place => p["Location"],
+                     :style => p["ParkType"],
+                     :story => p["Introduction"])
       end
     end
 
@@ -31,17 +34,21 @@ end
       users << User.create!( :email => Faker::Internet.email, :password => "12345678" )
     end
 
-    100.times do
+    20.times do
       t = Topic.create!( :subject => Faker::Lorem.sentence,
                      :content => Faker::Lorem.paragraph,
                      :status => "published",
-                     :user => users.sample  )
+                     :user => users.sample,
+                     :category_id => Category.ids.sample
+                     )
+
+
 
       (5 + rand(10)).times do
         t.comments.create!( :content => Faker::Lorem.sentence,
                             :user => users.sample )
+
       end
     end
-
   end
 end

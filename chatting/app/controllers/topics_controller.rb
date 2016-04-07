@@ -3,25 +3,36 @@ class TopicsController < ApplicationController
   before_action :set_my_topic, :only => [:edit, :update, :destroy]
 
   def index
+
       @q = Topic.ransack(params[:q])
+
       @topics = @q.result(distinct: true)
 
-      if params[:sort] == "id"
+      if params[:sort] == "by ID"
         @topics = @topics.order("id")
-      elsif params[:sort] == "updated"
+      elsif params[:sort] == "by time"
         @topics = @topics.order("updated_at DESC")
+      elsif params[:sort] == "by replies"
+        @topics = @topics.order("comments_count")
       else
         @topics = @topics.order("id DESC")
       end
 
       @topics = @topics.where( :status => "published" )
+      @topics = @topics.page(params[:page]).per(10)
 
-      @topics = @topics.page( params[:page] )
     end
 
   def show
     @topic = Topic.find(params[:id])
     @comment = Comment.new
+
+    unless cookies["view-topic=#{@topic.id}"]
+      cookies["view-topic-#{@topic.id}"] = "viewed"
+      @topic.views_count += 1
+      @topic.save!
+    end
+
   end
 
   def new
@@ -60,23 +71,31 @@ class TopicsController < ApplicationController
 
   def subscribe
     @topic = Topic.find( params[:id] )
-
-    subscription = @topic.finy_subscription_by(current_user)
-    if subscription
-    else
-      @subscription = @topic.subscriptions.create!( :user => current_user)
+    @topic.subscriptions.create!( :user => current_user)
+    # subscription = @topic.finy_subscription_by(current_user)
+    # if subscription
+    # else
+      # @subscription = @topic.subscriptions.create!( :user => current_user)
+    respond_to do |format|
+      format.html{ redirect_to :back }
+      format.js
     end
-
-    redirect_to :back
   end
+    # redirect_to :back
+  # end
 
   def unsubscribe
     @topic = Topic.find( params[:id] )
+    current_user.subscriptions.where( :topic_id => @topic.id ).destroy_all
 
-    subscription = @topic.finy_subscription_by(current_user)
-    subscription.destroy
+    # subscription = @topic.finy_subscription_by(current_user)
+    # subscription.destroy
 
-    redirect_to :back
+    # redirect_to :back
+    respond_to do |format|
+      format.html{ redirect_to :back }
+      format.js { render "subscribe"}
+    end
   end
 
 
@@ -88,6 +107,6 @@ class TopicsController < ApplicationController
   end
 
   def set_my_topic
-    @topic = current_user.topics.find( params[:id])
+    # @topic = current_user.topics.find( params[:id])
   end
 end

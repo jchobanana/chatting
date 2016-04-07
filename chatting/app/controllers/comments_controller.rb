@@ -8,6 +8,15 @@ class CommentsController < ApplicationController
     @comment.user = current_user
 
     if @comment.save
+
+      # # #notify users
+      # # all_users = @topic.comments.map{ |c| c.user }
+      # # all_users << @topic.user
+      # # all_users = all_users.uniq
+      # # all_users.each do |u|
+      # #   UserMailer.notify_comment(@topic, u).deliver_later
+      # end
+
       respond_to do |format|
         format.html {redirect_to topic_url(@topic) }
         format.js
@@ -18,6 +27,7 @@ class CommentsController < ApplicationController
         format.html { render "topics/show" }
         format.js
       end
+    # end
     end
   end
 
