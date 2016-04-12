@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160406084357) do
+ActiveRecord::Schema.define(version: 20160409152045) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -49,6 +49,14 @@ ActiveRecord::Schema.define(version: 20160406084357) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "profiles", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.text     "about"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "subscriptions", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "topic_id"
@@ -58,6 +66,22 @@ ActiveRecord::Schema.define(version: 20160406084357) do
 
   add_index "subscriptions", ["topic_id"], name: "index_subscriptions_on_topic_id"
   add_index "subscriptions", ["user_id"], name: "index_subscriptions_on_user_id"
+
+  create_table "tags", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "topic_taggers", force: :cascade do |t|
+    t.integer  "topic_id"
+    t.integer  "tag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "topic_taggers", ["tag_id"], name: "index_topic_taggers_on_tag_id"
+  add_index "topic_taggers", ["topic_id"], name: "index_topic_taggers_on_topic_id"
 
   create_table "topics", force: :cascade do |t|
     t.string   "subject"
@@ -92,6 +116,7 @@ ActiveRecord::Schema.define(version: 20160406084357) do
     t.string   "fb_uid"
     t.string   "fb_token"
     t.string   "time_zone"
+    t.integer  "profile_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

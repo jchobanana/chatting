@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
 
   has_many :topics
   has_many :comments
-
+  has_one :profile
 
   has_many :likes
   has_many :like_topics, :through => :likes, :source => :topic
@@ -48,7 +48,7 @@ class User < ActiveRecord::Base
    end
 
   def display_name
-    email.split('@').first
+    self.email.split('@').first
   end
 
 end

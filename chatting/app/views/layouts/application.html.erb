@@ -10,46 +10,54 @@
 </head>
 <body>
 <div class ="container">
-<p class = "text-right"><h1><%= link_to "Click Me to Go Home ಠ_ಠ", root_path %></h1></p>
-<%= link_to "Taipei Park Info", park_path, :class => "btn btn-info btn-md" %>
-<%= link_to "About Us", aboutus_path, :class => "btn btn-info btn-md" %>
+<h1><p class = "text-right"><%= link_to "Click Me to Go Home ಠ_ಠ", root_path %></p></h1>
+<p class = "text-right">| <%= link_to "Taipei Park Info", park_path, :class => "btn btn-primary btn-md" %> |
+<%= link_to "About Us", aboutus_path, :class => "btn btn-primary btn-md" %> |</p>
 <p></p>
-<% if current_user %>
+<h3><% if current_user %>
 <%= t(:hi, :name => current_user.display_name ) %>
-<%= t("hello_world") %>
 <p></p>
-<%= t("admin", :scope => "foo") %>
 <%= t("admin.foo") %>
-<%= t("admin.bar") %>
+<%= t("admin.bar") %></h3>
+<%= t("admin", :scope => "foo") %>
+
 <% end %>
 
 
 
 <% if current_user %>
-         <p class = "text-right"><%= link_to "Share Stories", new_topic_path, :class => "btn btn-info btn-sm" %> |
-         <%= link_to( t(:change_password) , edit_registration_path(:user), :class => "btn btn-warning btn-sm") %> |
-         <%= link_to " Edit Profile", edit_user_path(current_user), :class => "btn btn-info btn-sm" %> |
-         <%= link_to( t(:logout), destroy_user_session_path, :class => "btn btn-warning btn-sm", :method => :delete) %> |
+         <p class = "text-right">| <%= link_to "Share Stories", new_topic_path, :class => "btn btn-default btn-sm" %> |
+         <%= link_to( t(:change_password) , edit_registration_path(:user), :class => "btn btn-danger btn-sm") %> |
+         <%= link_to "Setting", edit_registration_path(:user), :class => "btn btn-danger btn-sm" %> |
+         <%= link_to " Edit Profile", edit_user_path(current_user), :class => "btn btn-danger btn-sm" %> |
+         <%= link_to( t(:logout), destroy_user_session_path, :class => "btn btn-default btn-sm", :method => :delete) %> |
      <% else %>
-         <%= link_to('註冊', new_registration_path(:user), :class => "btn btn-success btn-sm") %> |
-         <%= link_to('一般使用者登入', new_session_path(:user), :class => "btn btn-warning btn-sm") %> |
-         <%= link_to "登入 Facebook", user_omniauth_authorize_path(:facebook), :class => "btn btn-primary btn-sm" %>
+         <%= link_to('Sign-up', new_registration_path(:user), :class => "btn btn-default btn-sm") %> |
+         <%= link_to('Login', new_session_path(:user), :class => "btn btn-primary btn-sm") %> |
+         <%= link_to "Facebook Login", user_omniauth_authorize_path(:facebook), :class => "btn btn-primary btn-sm" %>
 
      <% end %>
 
 
      <p style="color: green"><%= flash[:notice] %></p>
      <p style="color: red"><%= flash[:alert] %></p>
+
       <div class="centered">
        <%= image_tag("speechless.png") %>
+       <%= image_tag("speechless.png") %>
+       <%= image_tag("speechless.png") %>
+
        </div>
+
 <%= yield %>
     </div>
   </div>
 </div>
-
-  <%= link_to "中文版", :controller => controller_name, :action => action_name, :locale => "zh-TW" %>
+<p class="text-center">
+  <%= link_to "中文版", :controller => controller_name, :action => action_name, :locale => "zh-TW" %> |
   <%= link_to "English", :controller => controller_name, :action => action_name, :locale => "en" %>
+</p>
+  <h3><p class="text-center"> | <%= link_to "Click Me to Go Home ಠ_ಠ", root_path %> | <%= link_to "Click Me to Go Home ಠ_ಠ", root_path %> | <%= link_to "Click Me to Go Home ಠ_ಠ", root_path %> |</p></h3>
 
 </body>
 </html>

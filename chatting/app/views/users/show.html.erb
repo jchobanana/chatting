@@ -1,5 +1,6 @@
 <h1><%=@user.display_name %></h1>
 
+
 <h3>Articles</h3>
 <% @user_topics.each do |topic| %>
   <%= simple_format link_to topic.subject, topic_path(topic) %>
@@ -9,3 +10,8 @@
 <% @comments.each do |t| %>
   <%= simple_format t.content %>
   <% end %>
+
+<h3>Likes</h3>
+<% @topics.each do |p| %>
+<%= simple_format link_to p.subject, topic_path(p)  %>
+<% end %>

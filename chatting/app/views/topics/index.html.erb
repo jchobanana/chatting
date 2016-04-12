@@ -1,38 +1,11 @@
-<h1><p class = "text-center">2555 Le Conte Ave.</p></h1>
+<h1><p class = "text-center">I'm your worst nightmare.</p></h1>
+
+<div id= "topics-pagination">
+<%= paginate @topics, remote: true %>
+</div>
+
+<div id="topics-page">
+  <%= render :partial => "topic" %>
+</div>
 
 
-<%= search_form_for @q do |f| %>
-  <%= f.label :subject_cont, "Search Keywords" %>
-  <%= f.search_field :subject_cont %>
-  <%= f.submit "Search" %>
-<% end %>
-
-<p><h3>
-  <%= sort_link(@q, :id, "by ID") %> |
-  <%= sort_link(@q, :updated_at, "by time") %> |
-  <%= sort_link(@q, :comments_count, "by replies") %>
-</p></h3>
-
-  <table class = "table table-striped">
-    <tr>
-      <th><h3>Title</h3></th>
-      <th><h3>Category</h3></th>
-      <th><h3>Author</h3></th>
-      <th><h3>Time</h3></th>
-      <th><h3>Views</h3></th>
-      <th><h3>Comments</h3></th>
-    </tr>
-
-  <h2><% @topics.each do |p| %>
-    <tr>
-      <td><%= link_to p.subject, topic_path(p) %></td>
-      <td><%= p.category.try(:name) %></td>
-      <td><%= p.user.try(:display_name) %></td>
-      <td><%= p.created_at.to_s(:short) %></td>
-      <td><%= p.views_count %></td>
-      <td><%= p.comments.size %></td>
-    </tr>
-  <% end %> </h2>
-</table>
-
-<%= paginate @topics %>

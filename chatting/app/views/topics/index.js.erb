@@ -1,0 +1,7 @@
+$("#topics-page").html(
+  "<%= escape_javascript(render :partial => "topic") %>"
+  );
+
+$("#topics-pagination").html(
+  "<%= escape_javascript(paginate @topics, remote: true) %>"
+  );

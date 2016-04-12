@@ -2,10 +2,20 @@
 .logo {
   height: 20px;
   }
-.centered {
-  position: relative;
-  left: 50%;
-  margin-left: -173px  ;
+
+.nav {
+  position: fixed;
+  background-color: rgb(192,192,192);
+
+}
+  .centered {
+    position: relative;
+    left: 10%;
+    margin-left: -173px  ;
+  }
+
+body {
+  background-color: rgb(192,192,192);
 }
 
 h1{

@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
+  resources :users, only: [:show]
+
   get "/park" => "taipei_park#park"
   get "/aboutus" => "aboutus#aboutus"
-
-  resources :users
 
   resources :topics do
   # The priority is based upon order of creation: first created -> highest priority.
@@ -16,6 +16,10 @@ Rails.application.routes.draw do
       post :subscribe
       post :unsubscribe
     end
+  end
+
+  resources :users do
+    resource :profile, :controller => :'user_profiles'
   end
 
   # You can have the root of your site routed with "root"

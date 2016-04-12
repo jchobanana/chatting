@@ -9,11 +9,13 @@ class TopicsController < ApplicationController
       @topics = @q.result(distinct: true)
 
       if params[:sort] == "by ID"
-        @topics = @topics.order("id")
+         @topics = @topics.order("id")
       elsif params[:sort] == "by time"
         @topics = @topics.order("updated_at DESC")
       elsif params[:sort] == "by replies"
         @topics = @topics.order("comments_count")
+      elsif params[:sort] == "by categories"
+        @topics = Category.find(params[:category_id]).topics
       else
         @topics = @topics.order("id DESC")
       end
@@ -21,11 +23,18 @@ class TopicsController < ApplicationController
       @topics = @topics.where( :status => "published" )
       @topics = @topics.page(params[:page]).per(10)
 
+        respond_to do |format|
+          format.html
+          format.js
+        end
+
     end
 
   def show
     @topic = Topic.find(params[:id])
     @comment = Comment.new
+    @users = User.where(:id =>@topic.likes.pluck(:user_id))
+
 
     unless cookies["view-topic=#{@topic.id}"]
       cookies["view-topic-#{@topic.id}"] = "viewed"
@@ -103,10 +112,11 @@ class TopicsController < ApplicationController
   protected
 
   def topic_params
-    params.require(:topic).permit(:content, :subject, :image, :category_id, :status)
+    params.require(:topic).permit(:content, :subject, :image, :category_id, :status, :tag_ids => [])
   end
 
   def set_my_topic
-    # @topic = current_user.topics.find( params[:id])
+    @topic = Topic.find( params[:id])
   end
+
 end

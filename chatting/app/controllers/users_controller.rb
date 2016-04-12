@@ -6,6 +6,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user_topics = @user.topics
     @comments = @user.comments
+    @topics = Topic.where(:id => @user.likes.pluck(:topic_id))
   end
 
   def edit

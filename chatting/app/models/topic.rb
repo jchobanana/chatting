@@ -17,6 +17,9 @@ class Topic < ActiveRecord::Base
   has_many :subscriptions
   has_many :subscribed_users, :through => :likes, :source => :user
 
+  has_many :topic_taggers
+  has_many :tags, :through => :topic_taggers
+
   has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "150x150>" }, :default_url => "/images/:style/missing.png"
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
 

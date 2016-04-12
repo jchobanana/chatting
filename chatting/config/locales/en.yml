@@ -20,8 +20,15 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  hi: "Hi, %{name}. How you doing ?"
   hello_world: "Hello world!!!!"
+  logout: logout
+  change_password: change password
+
+  admin:
+    foo: Damn Bro,
+    bar: Life is Hard huh ?
+
 
   topic:
     status:
