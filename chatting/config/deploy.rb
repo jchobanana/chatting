@@ -6,7 +6,7 @@ lock '3.4.1'
 set :application, 'chatting'
 
 set :repo_url, 'git@github.com:jchobanana/chatting.git'
-set :deploy_to, '/home/deploy/chatting'
+set :deploy_to, '/home/deploy/chatting/'
 set :keep_releases, 5
 set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml', 'config/facebook.yml')  # 如果有 facebook.yml 或 email.yml 想要連結的話，也要加進來
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
