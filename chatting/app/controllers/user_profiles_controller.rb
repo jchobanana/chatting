@@ -20,7 +20,11 @@ class UserProfilesController < ApplicationController
   end
 
   def edit
+    if @user.profile.nil?
+    @profile = @user.build_profile( profile_params )
+  else
     @profile = @user.profile
+  end
   end
 
   def update
@@ -48,7 +52,7 @@ protected
   end
 
   def profile_params
-    params.require(:profile).permit(:name)
+    params.require(:profile).permit(:name,:about)
   end
 
 end

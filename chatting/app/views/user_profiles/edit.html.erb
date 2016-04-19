@@ -1,3 +1,15 @@
 <h1> Tell Us More </h1>
 
-<%= @profile %>
+<% @profile %>
+
+<%= form_for @profile, url: user_profile_path do |p| %>
+  <%= p.label :name,"Name"%>
+  <%= p.text_field :name %>
+
+  <%= p.label :about, "About YOu" %>
+  <%= p.text_area :about %>
+
+  <%= p.submit %>
+
+  <% end%>
+

@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   has_many :like_topics, :through => :likes, :source => :topic
 
   has_many :subscriptions
-  has_many :subscribed_topics, :through => :likes, :source => :topic
+  has_many :subscribed_topics, :through => :subscriptions, :source => :topic
 
 
   def self.from_omniauth(auth)
